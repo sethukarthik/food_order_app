@@ -4,3 +4,4 @@ spring:
     username: root
     password: Stunning.0093
     driver-class-name: com.mysql.cj.jdbc.Driver
+
