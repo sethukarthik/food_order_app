@@ -1,9 +1,20 @@
 package com.myapp.foodieapp.model;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.myapp.foodieapp.enums.UserProfileEnums;
+
+
 
 @Entity
 public class User {
@@ -11,14 +22,31 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String full_name, email, mobile, password;
+	
+	@Column(name="full_name")
+	private String customerName;
+	private String email, mobile, password;
+	
+//	@Enumerated(EnumType.ORDINAL)
+	@Column(name="account_inactive")
+	private int accountStatus;
+	
+	@Temporal(value=TemporalType.TIMESTAMP)
+	@Column(name="created_at")
+//	@CreatedDate
+	private Date createdAt;
+	
+	@Temporal(value=TemporalType.TIMESTAMP)
+	@Column(name="updated_at")
+//	@LastModifiedDate
+	private Date updatedAt;
 
-	public User() {
-	}
+	//Default constructor
+	public User() {}
 
-	public User(int id, String full_name, String email, String mobile, String password) {
+	public User(int id, String customerName, String email, String mobile, String password) {
 		this.id = id;
-		this.full_name = full_name;
+		this.customerName = customerName;
 		this.email = email;
 		this.mobile = mobile;
 		this.password = password;
@@ -30,14 +58,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getFull_name() {
-		return full_name;
-	}
-
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
 	}
 
 	public String getEmail() {
@@ -63,4 +83,40 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public UserProfileEnums getAccountStatus() {
+		return accountStatus == 0 ? UserProfileEnums.ACTIVE : UserProfileEnums.INACTIVE;
+	}
+	
+	public void setAccountStatus(UserProfileEnums accountStatus) {
+		this.accountStatus = accountStatus.equals(UserProfileEnums.ACTIVE) ? 0 : 1;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@PrePersist
+	public void setCreatedAt() {
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@PreUpdate
+	public void setUpdatedAt() {
+		this.updatedAt = new Date();
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.myapp.foodieapp.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,16 @@ public class UserController {
 		return userService.getAllCustomerDetails();
 	}
 	
+	@GetMapping("/activeCustomerInfo")
+	public List<User> getActiveUser(){
+		return userService.getActiveCustomer();
+	}
+	
+	@GetMapping("/inactiveCustomerInfo")
+	public List<User> getInActiveUser(){
+		return userService.getInActiveCustomer();
+	}
+	
 	@GetMapping("/{id}")
 	public Object findByCustomerId(@PathVariable("id") int customerId) throws Exception {
 		return userService.findByCustomerId(customerId);
@@ -51,5 +63,10 @@ public class UserController {
 	@PatchMapping("/updateMobile")
 	public String updateMobile(@RequestBody User user) {
 		return userService.updateCustomerMobile(user);
+	}
+	
+	@PatchMapping("/updateAccountStatus")
+	public String updateAccountStatus(@RequestBody User user) {
+		return userService.updateAccountStatus(user);
 	}
 }

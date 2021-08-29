@@ -1,9 +1,13 @@
 package com.myapp.foodieapp.user_service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import com.myapp.foodieapp.enums.UserProfileEnums;
 import com.myapp.foodieapp.model.User;
 import com.myapp.foodieapp.repository.UserRepository;
 
@@ -18,7 +22,12 @@ public class UserServiceImplementation implements UserService {
 
 	@Override
 	public Iterable<User> getAllCustomerDetails() {
-		return userRepo.findAll(); 
+		try {			
+			return userRepo.findAll(); 
+		} catch (DataAccessException ex) {
+			System.out.println(ex.getLocalizedMessage());
+			return null;
+		}
 	}
 	
 	@Override
@@ -33,13 +42,12 @@ public class UserServiceImplementation implements UserService {
 
 	@Override
 	public String createNewCustomer(User user) {
-		Optional<User> userSave = Optional.ofNullable(user);
-		User u = new User();
-		if(userSave.isPresent()) {			
+		try {
 			userRepo.save(user);
 			return "User has been created successfull";
-		} else {
-			return "Something went wrong";
+		} catch(DataAccessException ex) {
+			System.out.println(ex.getLocalizedMessage());
+			return null;
 		}
 	}
 
@@ -63,8 +71,31 @@ public class UserServiceImplementation implements UserService {
 
 	@Override
 	public String updateCustomerMobile(User user) {
-		System.out.println(user);
 		userRepo.updateCustomerMobile(user.getId(), user.getMobile());
 		return "Mobile Number updated";
+	}
+
+	@Override
+	public List<User> getActiveCustomer() {
+		return userRepo.getActiveCustomer();
+	}
+
+	@Override
+	public List<User> getInActiveCustomer() {
+		return userRepo.getInActiveCustomer();
+	}
+	
+	@Override
+	public String updateAccountStatus(User user) {
+		try {
+			userRepo.updateAccountStatus(user.getId(), getAccountStatusFromEnum(user));
+			return user.getCustomerName() + " Account deactivated";
+		} catch (DataAccessException e) {
+			return e.getLocalizedMessage();
+		}
+	}
+	
+	private static int getAccountStatusFromEnum(User user) {
+		return user.getAccountStatus().equals(UserProfileEnums.ACTIVE) ? 0 : 1; 
 	}
 }

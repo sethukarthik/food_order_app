@@ -1,5 +1,7 @@
 package com.myapp.foodieapp.user_service;
 
+import java.util.List;
+
 import com.myapp.foodieapp.model.User;
 
 public interface UserService {
@@ -15,5 +17,11 @@ public interface UserService {
 	String deleteCustomer(int id);
 	
 	String updateCustomerMobile(User user);
+	
+	List<User> getActiveCustomer();
+
+	List<User> getInActiveCustomer();
+	
+	String updateAccountStatus(User user);
 	
 }
