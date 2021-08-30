@@ -1,7 +1,7 @@
-# springboot_mvc
+# Foodie App
 
 ## Class
-######**User**
+**User**
 	**Properties**
 	
 	1. FullName
