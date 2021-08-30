@@ -54,7 +54,6 @@ public class UserServiceImplementation implements UserService {
 	@Override
 	public String updateCustomerInfo(User user) {
 		Optional<User> userSave = Optional.ofNullable(user);
-		User u = new User();
 		if(userSave.isPresent()) {			
 			userRepo.save(user);
 			return "User info updated successfull";
