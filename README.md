@@ -14,7 +14,7 @@
 	
 ## SQL Schema	
 
-**This schema will generate a new database and creates a User table**
+**This schema generates a new database and creates a User table**
 
 ```
 create database if not exists spring_demo;
