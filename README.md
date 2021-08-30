@@ -52,7 +52,7 @@ commit;
 **Get All Customer**
 ``` 
 Request Method - GET
-URL - http://localhost:8080/customer/allCustomers
+URL - *http://localhost:8080/customer/allCustomers*
 Response - [{
         "id": 1,
         "customerName": "SethuKarthik",
