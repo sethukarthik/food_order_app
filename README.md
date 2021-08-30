@@ -1,8 +1,8 @@
 # springboot_mvc
 
 ## Class
-###### ** User **
-	** Properties **
+######**User**
+	**Properties**
 	
 	1. FullName
 	2. Email
@@ -14,7 +14,7 @@
 	
 ## SQL Schema	
 
-** This schema will generate a new database and creates a User table **
+**This schema will generate a new database and creates a User table**
 
 ```
 create database if not exists spring_demo;
@@ -49,7 +49,7 @@ commit;
 
 ## List of Request for Users Controller
 
-** Get All Customer **
+**Get All Customer**
 ``` 
 Request Method - GET
 URL - http://localhost:8080/customer/allCustomers
@@ -74,7 +74,7 @@ Response - [{
 ]
 ```
 
-** Find Customer by Customer Id **
+**Find Customer by Customer Id**
 ```
 Request Method - GET
 URL - http://localhost:8080/customer/13
@@ -89,7 +89,7 @@ Response - {
 }
 ```
 
-** Register New User **
+**Register New User**
 ```
 Request Method - POST
 URL - http://localhost:8080/customer
@@ -101,7 +101,7 @@ Payload - {
 }
 ```
 
-** Update User info **
+**Update User info**
 ```
 Request Method - PUT
 URL - http://localhost:8080/customer
@@ -114,7 +114,7 @@ Payload - {
 }
 ```
 
-** Delete User Account **
+**Delete User Account**
 ```
 Request Method - DELETE
 URL - http://localhost:8080/customer?id=3
@@ -122,7 +122,7 @@ Params - id
 Response - 200
 ```
 
-** Get Active User **
+**Get Active User**
 ```
 Request Method - GET
 URL - http://localhost:8080/customer/activeCustomerInfo
@@ -147,7 +147,7 @@ Response - [{
 ]
 ```
 
-** Get Inactive User **
+**Get Inactive User**
 ```
 Request Method - GET
 URL - http://localhost:8080/customer/inactiveCustomerInfo
@@ -172,7 +172,7 @@ Response - [{
 ]
 ```
 
-** Update User Account Status **
+**Update User Account Status**
 ```
 Request Method - PATCH
 URL - http://localhost:8080/customer/updateAccountStatus
