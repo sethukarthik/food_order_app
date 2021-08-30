@@ -1,7 +1,7 @@
 # springboot_mvc
 
-#Class
-User
+## Class
+###### User
 	Properties
 	
 	1. FullName
@@ -12,9 +12,11 @@ User
 	6. CreatedAt
 	7. UpdatedAt
 	
-SQL Schema	
+## SQL Schema	
 
-create database if not exists spring_demo;
+** This schema will generate a new database and creates a User table **
+
+```create database if not exists spring_demo;
 
 use spring_demo;
 
@@ -39,7 +41,7 @@ insert into user(id, full_name, email, mobile, password) values(3, "NirmalKumar"
 insert into user(id, full_name, email, mobile, password) values(4, "Nageswaran", "nagesh@gmail.com", "+916666841129", "123456");
 
 select * from user;
-commit;
+commit;```
 
 
 List of Request for Users Controller
