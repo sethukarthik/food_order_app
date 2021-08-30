@@ -2,8 +2,11 @@ package com.myapp.foodieapp.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.foodieapp.exception.ApiRequestException;
 import com.myapp.foodieapp.model.User;
 import com.myapp.foodieapp.user_service.UserService;
 
@@ -42,7 +46,12 @@ public class UserController {
 	
 	@GetMapping("/{id}")
 	public Object findByCustomerId(@PathVariable("id") int customerId) throws Exception {
-		return userService.findByCustomerId(customerId);
+		Optional<Object> user = Optional.ofNullable(userService.findByCustomerId(customerId));
+		if(user.isPresent()) {
+			return user;
+		} else {
+			throw new ApiRequestException("User not found");
+		}
 	}
 		
 	@PostMapping

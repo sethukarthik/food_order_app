@@ -36,7 +36,7 @@ public class UserServiceImplementation implements UserService {
 		if(user.isPresent()) {				
 			return user;
 		} else {
-			return "No customer found for the id: " + customerId;
+			return null;
 		}
 	}
 
@@ -89,7 +89,7 @@ public class UserServiceImplementation implements UserService {
 	public String updateAccountStatus(User user) {
 		try {
 			userRepo.updateAccountStatus(user.getId(), getAccountStatusFromEnum(user));
-			return user.getCustomerName() + " Account deactivated";
+			return "Account deactivated";
 		} catch (DataAccessException e) {
 			return e.getLocalizedMessage();
 		}
