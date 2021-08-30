@@ -1,8 +1,8 @@
 # springboot_mvc
 
 ## Class
-###### User
-	Properties
+###### ** User **
+	** Properties **
 	
 	1. FullName
 	2. Email
@@ -16,7 +16,8 @@
 
 ** This schema will generate a new database and creates a User table **
 
-```create database if not exists spring_demo;
+```
+create database if not exists spring_demo;
 
 use spring_demo;
 
@@ -41,13 +42,15 @@ insert into user(id, full_name, email, mobile, password) values(3, "NirmalKumar"
 insert into user(id, full_name, email, mobile, password) values(4, "Nageswaran", "nagesh@gmail.com", "+916666841129", "123456");
 
 select * from user;
-commit;```
+commit; 
+
+```
 
 
-List of Request for Users Controller
+## List of Request for Users Controller
 
-
-Get All Customer
+** Get All Customer **
+``` 
 Request Method - GET
 URL - http://localhost:8080/customer/allCustomers
 Response - [{
@@ -69,9 +72,10 @@ Response - [{
         "updatedAt": "2021-03-24T11:18:06.000+00:00"
     }
 ]
+```
 
-
-Find Customer by Customer Id
+** Find Customer by Customer Id **
+```
 Request Method - GET
 URL - http://localhost:8080/customer/13
 Response - {
@@ -83,8 +87,10 @@ Response - {
     "createdAt": "2021-03-24T11:18:06.000+00:00",
     "updatedAt": "2021-03-24T11:18:06.000+00:00"
 }
+```
 
-Register New User
+** Register New User **
+```
 Request Method - POST
 URL - http://localhost:8080/customer
 Payload - {
@@ -93,8 +99,10 @@ Payload - {
     "mobile": "+919566841129",
     "password": "8745ASF"
 }
+```
 
-Update User info
+** Update User info **
+```
 Request Method - PUT
 URL - http://localhost:8080/customer
 Payload - {
@@ -104,14 +112,18 @@ Payload - {
     "mobile": "+919566841129",
     "password": "8745ASF"
 }
+```
 
-Delete User Account
+** Delete User Account **
+```
 Request Method - DELETE
 URL - http://localhost:8080/customer?id=3
 Params - id
 Response - 200
+```
 
-Get Active User
+** Get Active User **
+```
 Request Method - GET
 URL - http://localhost:8080/customer/activeCustomerInfo
 Response - [{
@@ -133,8 +145,10 @@ Response - [{
         "updatedAt": "2021-03-24T11:18:06.000+00:00"
     }
 ]
+```
 
-Get Inactive User
+** Get Inactive User **
+```
 Request Method - GET
 URL - http://localhost:8080/customer/inactiveCustomerInfo
 Response - [{
@@ -156,11 +170,14 @@ Response - [{
         "updatedAt": "2021-03-24T11:18:06.000+00:00"
     }
 ]
+```
 
-Update User Account Status
+** Update User Account Status **
+```
 Request Method - PATCH
 URL - http://localhost:8080/customer/updateAccountStatus
 Payload - {
     "id": 2,
     "accountStatus": "ACTIVE"
 }
+```
