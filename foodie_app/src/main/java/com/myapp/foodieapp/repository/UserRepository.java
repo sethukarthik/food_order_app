@@ -15,6 +15,7 @@ import com.myapp.foodieapp.model.User;
 public interface UserRepository extends CrudRepository<User, Integer> {
 
 	@Modifying
+	@Transactional
 	@Query(value="UPDATE User SET mobile = :mobile WHERE id = :id", nativeQuery=true)
 	public int updateCustomerMobile(int id, String mobile);
 	

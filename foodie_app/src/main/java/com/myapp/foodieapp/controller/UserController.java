@@ -1,7 +1,10 @@
 package com.myapp.foodieapp.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.foodieapp.exception.ApiRequestException;
 import com.myapp.foodieapp.model.User;
+import com.myapp.foodieapp.response.ResponseHandler;
 import com.myapp.foodieapp.user_service.UserService;
 
 @RestController
@@ -75,7 +79,15 @@ public class UserController {
 	}
 	
 	@PatchMapping("/updateAccountStatus")
-	public String updateAccountStatus(@RequestBody User user) {
-		return userService.updateAccountStatus(user);
+	public ResponseEntity<Object> updateAccountStatus(@RequestBody User user) {
+		try {
+			userService.updateAccountStatus(user);
+			Map<String, Object> userInfo = new HashMap<>();
+			userInfo.put("CustomerId", user.getId());
+			userInfo.put("AccountStatus", user.getAccountStatus());
+			return ResponseHandler.generateResponse("Update", HttpStatus.OK, userInfo);
+		} catch (Exception e) {
+			return ResponseHandler.generateResponse(e.getLocalizedMessage(), HttpStatus.MULTI_STATUS, null);
+		}
 	}
 }

@@ -70,8 +70,12 @@ public class UserServiceImplementation implements UserService {
 
 	@Override
 	public String updateCustomerMobile(User user) {
-		userRepo.updateCustomerMobile(user.getId(), user.getMobile());
-		return "Mobile Number updated";
+		try {			
+			userRepo.updateCustomerMobile(user.getId(), user.getMobile());
+			return "Mobile Number updated";
+		} catch (DataAccessException e) {
+			return e.getLocalizedMessage();
+		}
 	}
 
 	@Override
@@ -85,10 +89,9 @@ public class UserServiceImplementation implements UserService {
 	}
 	
 	@Override
-	public String updateAccountStatus(User user) {
+	public Object updateAccountStatus(User user) {
 		try {
-			userRepo.updateAccountStatus(user.getId(), getAccountStatusFromEnum(user));
-			return "Account deactivated";
+			return userRepo.updateAccountStatus(user.getId(), getAccountStatusFromEnum(user));
 		} catch (DataAccessException e) {
 			return e.getLocalizedMessage();
 		}

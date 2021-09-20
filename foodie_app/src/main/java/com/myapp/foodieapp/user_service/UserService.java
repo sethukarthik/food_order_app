@@ -22,6 +22,6 @@ public interface UserService {
 
 	List<User> getInActiveCustomer();
 	
-	String updateAccountStatus(User user);
+	Object updateAccountStatus(User user);
 	
 }

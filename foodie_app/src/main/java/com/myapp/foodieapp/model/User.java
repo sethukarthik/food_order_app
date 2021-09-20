@@ -14,8 +14,6 @@ import javax.persistence.TemporalType;
 
 import com.myapp.foodieapp.enums.UserProfileEnums;
 
-
-
 @Entity
 public class User {
 	
@@ -103,7 +101,7 @@ public class User {
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-
+	
 	@PrePersist
 	public void setCreatedAt() {
 		this.createdAt = new Date();
@@ -116,6 +114,9 @@ public class User {
 
 	@PreUpdate
 	public void setUpdatedAt() {
+		System.out.println(getCreatedAt());
+		System.out.println("---------------");
+		this.createdAt = getCreatedAt();
 		this.updatedAt = new Date();
 	}
 
